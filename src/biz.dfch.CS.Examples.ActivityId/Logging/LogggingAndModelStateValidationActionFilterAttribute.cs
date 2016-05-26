@@ -21,7 +21,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http.Controllers;
-using System.Web.Http.Filters;.
+using System.Web.Http.Filters;
 using Logger = biz.dfch.CS.Examples.ActivityId.Logging.BizDfchCsExamplesActivityId;
 
 namespace biz.dfch.CS.Examples.ActivityId.Logging
