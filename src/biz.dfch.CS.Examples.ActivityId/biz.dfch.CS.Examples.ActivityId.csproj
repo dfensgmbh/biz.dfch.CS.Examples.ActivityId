@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="GlobalUpdateConfigurationEventHandler.cs" />
     <Compile Include="ODataServices\Core\Sample.cs" />
     <Compile Include="ODataServices\Core\SamplesController.cs" />
     <Compile Include="Global.asax.cs">
