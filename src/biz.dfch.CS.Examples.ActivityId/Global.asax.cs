@@ -24,36 +24,24 @@ namespace biz.dfch.CS.Examples.ActivityId
 {
     public class Global : System.Web.HttpApplication
     {
-        internal static bool ApplicationStartupCompleted;
-
         protected void Application_Start(object sender, EventArgs e)
         {
-            Logger.Default.Start();
-
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-            {
-                Formatting = Formatting.None
-                ,
-                //DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffffffzzz"
-                //,
-                //DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
-                //,
-                DateParseHandling = DateParseHandling.DateTimeOffset
-                ,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
+            // LOGGING - Simple logging in Global.asax.cs
+            Logger.Default.Start("SIMPLE-LOGGING-IN-GLOBAL-ASAX");
 
             // Register OData endpoints
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
-            ApplicationStartupCompleted = true;
+            // Initialise GlobalUpdateConfigurationEventHandler
+            new GlobalUpdateConfigurationEventHandler();
 
+            // LOGGING - Simple logging in Global.asax.cs
             Logger.Default.End(true);
         }
 
         protected void Application_End(object sender, EventArgs e)
         {
-            Logger.Default.Start();
+            Logger.Default.Start("SIMPLE-LOGGING-IN-GLOBAL-ASAX");
 
             Logger.Default.End(true);
         }

@@ -38,8 +38,10 @@ namespace biz.dfch.CS.Examples.ActivityId.Logging
                 return;
             }
 
-            var tid = "unknown";
-            Logger.Default.StartOdataAction(actionContext, tid);
+            var tenantId = "ArbitraryTenantId";
+
+            // LOGGING - Simple synchronous logging when OData action starts
+            Logger.Default.StartOdataAction(actionContext, tenantId);
 
             if (!actionContext.ModelState.IsValid)
             {
@@ -54,7 +56,6 @@ namespace biz.dfch.CS.Examples.ActivityId.Logging
         {
             base.OnActionExecuted(actionExecutedContext);
 
-            // check for null AFTER the other filters got called
             if (null == actionExecutedContext)
             {
                 return;
@@ -63,14 +64,17 @@ namespace biz.dfch.CS.Examples.ActivityId.Logging
             var activityId = System.Diagnostics.Trace.CorrelationManager.ActivityId;
             if (null != actionExecutedContext.Exception)
             {
+                // LOGGING - Simple synchronous logging when OData action failed
                 Logger.Default.EndOdataActionException(activityId);
             }
             else if (null != actionExecutedContext.Response)
             {
+                // LOGGING - Simple synchronous logging when OData action ended
                 Logger.Default.EndOdataAction(activityId, (int)actionExecutedContext.Response.StatusCode);
             }
             else
             {
+                // LOGGING - Simple synchronous logging when OData action ended with invalid state
                 Logger.Default.EndOdataActionInvalidState(activityId);
             }
         }

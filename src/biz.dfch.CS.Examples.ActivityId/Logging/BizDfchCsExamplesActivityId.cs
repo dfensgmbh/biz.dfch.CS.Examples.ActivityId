@@ -27,8 +27,6 @@ namespace biz.dfch.CS.Examples.ActivityId.Logging
     [EventSource(Name = "BizDfch-Example-ActivityId-edb910e7-c953-4c79-b04f-15efa5400456")]
     public partial class BizDfchCsExamplesActivityId : EventSource
     {
-        private const int SYSLOG_BASE_EVENT_ID = 0;
-        private const int DIAGNOSTICS_BASE_EVENT_ID = 16;
         private const int GENERAL_BASE_EVENT_ID = 32;
 
         private static readonly BizDfchCsExamplesActivityId _log = new BizDfchCsExamplesActivityId();

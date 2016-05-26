@@ -43,13 +43,14 @@ namespace biz.dfch.CS.Examples.ActivityId.OdataServices.Core
             builder.EntitySet<Sample>(entitySetName);
         }
 
-        // GET: odata/Samples
+        // GET http://HOST:PORT/Core/Samples
         [EnableQuery(PageSize = 45)]
         public IHttpActionResult GetSamples(ODataQueryOptions<Sample> queryOptions)
         {
             Contract.Requires(null != queryOptions, "|400|");
 
-            Logger.Default.Start("Getting samples");
+            // LOGGING - Simple synchronous logging
+            Logger.Default.Start("SIMPLE-LOGGING - Getting samples");
 
             queryOptions.Validate(_validationSettings);
 
@@ -62,26 +63,19 @@ namespace biz.dfch.CS.Examples.ActivityId.OdataServices.Core
                 entitiesResult.Add(entity);
             }
 
-            Logger.Default.End("Getting samples");
+            // LOGGING - Simple synchronous logging
+            Logger.Default.End("SIMPLE-LOGGING - Getting samples");
 
             return Ok<IEnumerable<Sample>>(entitiesResult);
         }
 
+        // GET http://HOST:PORT/Core/Samples(ID)
         public async Task<IHttpActionResult> GetSample([FromODataUri] long key, ODataQueryOptions<Sample> queryOptions)
         {
             Contract.Requires(0 < key, "|400|");
             Contract.Requires(null != queryOptions, "|400|");
 
-            Logger.Default.Start("Getting sample by Id");
-
-            queryOptions.Validate(_validationSettings);
-
-            var entity = new Sample();
-            entity.Name = string.Format("Sample-{0}", key);
-
-            Logger.Default.End("Getting sample by Id");
-
-            return Ok<Sample>(entity);
+            throw new NotImplementedException();
         }
 
         public async Task<IHttpActionResult> Put([FromODataUri] long key, Sample entityToBeUpdated)

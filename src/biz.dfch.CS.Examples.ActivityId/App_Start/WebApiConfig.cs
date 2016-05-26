@@ -32,29 +32,20 @@ namespace biz.dfch.CS.Examples.ActivityId
         {
             Contract.Requires(null != config);
 
-            Logger.Default.Start("WebApiConfig");
+            // LOGGING - Logging from static method called via Global.asax.cs
+            Logger.Default.Start("LOGGING-FROM-STATIC-METHOD-CALLED-VIA-GLOBAL-ASAX-CS");
             
             // Action filters
-            // filters are processes in random order
-            // see https://damienbod.wordpress.com/2014/01/04/web-api-2-using-actionfilterattribute-overrideactionfiltersattribute-and-ioc-injection/
             config.Filters.Add(new LogggingAndModelStateValidationActionFilterAttribute());
 
-            // Exception loggers
-            //GlobalConfiguration.Configuration.Services.Add(typeof(IExceptionLogger), new TraceExceptionLogger());
-            
             config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "Core",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             SamplesController.ModelBuilder(builder);
             config.Routes.MapODataRoute("Core", "Core", builder.GetEdmModel());
 
-            Logger.Default.End("WebApiConfig");
+            // LOGGING - Logging from static method called via Global.asax.cs
+            Logger.Default.End("LOGGING-FROM-STATIC-METHOD-CALLED-VIA-GLOBAL-ASAX-CS");
         }
     }
 }
