@@ -17,12 +17,62 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;.
+using Logger = biz.dfch.CS.Examples.ActivityId.Logging.BizDfchCsExamplesActivityId;
 
 namespace biz.dfch.CS.Examples.ActivityId.Logging
 {
-    public class LogggingAndModelStateValidationActionFilterAttribute
+    // filters are processed in random order
+    // see https://damienbod.wordpress.com/2014/01/04/web-api-2-using-actionfilterattribute-overrideactionfiltersattribute-and-ioc-injection/
+    // therefore we process logging and validation in a single action
+    public class LogggingAndModelStateValidationActionFilterAttribute : ActionFilterAttribute
     {
-        // DFTDOO - Implement!!
+        public override void OnActionExecuting(HttpActionContext actionContext)
+        {
+            if (null == actionContext)
+            {
+                return;
+            }
+
+            var tid = "unknown";
+            Logger.Default.StartOdataAction(actionContext, tid);
+
+            if (!actionContext.ModelState.IsValid)
+            {
+                actionContext.Response = actionContext.Request
+                    .CreateErrorResponse(HttpStatusCode.BadRequest, actionContext.ModelState);
+            }
+
+            base.OnActionExecuting(actionContext);
+        }
+
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        {
+            base.OnActionExecuted(actionExecutedContext);
+
+            // check for null AFTER the other filters got called
+            if (null == actionExecutedContext)
+            {
+                return;
+            }
+
+            var activityId = System.Diagnostics.Trace.CorrelationManager.ActivityId;
+            if (null != actionExecutedContext.Exception)
+            {
+                Logger.Default.EndOdataActionException(activityId);
+            }
+            else if (null != actionExecutedContext.Response)
+            {
+                Logger.Default.EndOdataAction(activityId, (int)actionExecutedContext.Response.StatusCode);
+            }
+            else
+            {
+                Logger.Default.EndOdataActionInvalidState(activityId);
+            }
+        }
     }
 }
