@@ -49,7 +49,7 @@ namespace biz.dfch.CS.Examples.ActivityId.OdataServices.Core
         {
             Contract.Requires(null != queryOptions, "|400|");
 
-            Logger.Start("Getting samples");
+            Logger.Default.Start("Getting samples");
 
             queryOptions.Validate(_validationSettings);
 
@@ -62,7 +62,7 @@ namespace biz.dfch.CS.Examples.ActivityId.OdataServices.Core
                 entitiesResult.Add(entity);
             }
 
-            Logger.End("Getting samples");
+            Logger.Default.End("Getting samples");
 
             return Ok<IEnumerable<Sample>>(entitiesResult);
         }
@@ -72,14 +72,14 @@ namespace biz.dfch.CS.Examples.ActivityId.OdataServices.Core
             Contract.Requires(0 < key, "|400|");
             Contract.Requires(null != queryOptions, "|400|");
 
-            Logger.Start("Getting sample by Id");
+            Logger.Default.Start("Getting sample by Id");
 
             queryOptions.Validate(_validationSettings);
 
             var entity = new Sample();
             entity.Name = string.Format("Sample-{0}", key);
 
-            Logger.End("Getting sample by Id");
+            Logger.Default.End("Getting sample by Id");
 
             return Ok<Sample>(entity);
         }
