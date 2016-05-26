@@ -4,16 +4,9 @@
 Sample usage of System.Diagnostics.Trace.CorrelationManager.ActivityId in context of OData controllers
 
 
-# ETW Listener
+## ETW Listener
 
-## General
-
-There is a NuGet package called [`Semantic Logging Application Block`](https://www.nuget.org/packages/EnterpriseLibrary.SemanticLogging.Service/) that allows viewing logs written to an event source:
-
-> The Semantic Logging Application Block provides a set of destinations (sinks) to persist application events published using a subclass of the EventSource class from the System.Diagnostics.Tracing namespace. Sinks include Azure table storage, SQL Server databases, file, console and rolling files with several formats and you can extend the block by creating your own custom formatters and sinks. The console sink is part of this nuget package. Other Sinks mentioned above are available as separate nuget packages. For the sinks that can store structured data, the block preserves the full structure of the event payload in order to facilitate analysing or processing the logged data.
-
-
-## Setup
+### Setup
 
 1. Install NuGet package [`Semantic Logging Application Block`](https://www.nuget.org/packages/EnterpriseLibrary.SemanticLogging.Service/) 
   
@@ -36,7 +29,7 @@ There is a NuGet package called [`Semantic Logging Application Block`](https://w
 </flatFileSink>
 ```
 
-### Windows Service
+#### Windows Service
 
 1. Execute `C:\DESTINATION\DIRECTORY\EnterpriseLibrary.SemanticLogging.Service.2.0.1406.1\tools\SemanticLogging-svc.exe -install`
 
@@ -49,9 +42,9 @@ There is a NuGet package called [`Semantic Logging Application Block`](https://w
 1. Startup type: `Automatic`
 1. Start service
 
-## Listen to source
+### Listen to source
 
-### Console
+#### Console
 
 1. Open `C:\DESTINATION\DIRECTORY\EnterpriseLibrary.SemanticLogging.Service.2.0.1406.1\tools\SemanticLogging-svc.xml`
 1. Add the following `consoleSink`
