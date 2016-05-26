@@ -258,7 +258,6 @@ namespace biz.dfch.CS.Examples.ActivityId.Logging
         internal void TraceInnerException(Guid activityId, ExceptionLoggerContext context, Exception ex, string userName, string tenantId, int innerExceptionCount)
         {
             if (this.IsEnabled()) this.TraceInnerException(activityId, context.Request.Method.Method, context.Request.RequestUri.ToString(), ex.GetType().Name, ex.Source, ex.Message, ex.StackTrace, userName, tenantId, innerExceptionCount);
-            biz.dfch.CS.Utilities.Logging.Trace.WriteException(ex.Message, ex);
         }
     }
 }
