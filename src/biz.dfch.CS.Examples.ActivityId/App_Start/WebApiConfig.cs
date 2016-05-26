@@ -20,7 +20,7 @@ using System.Web.Http;
 using Logger = biz.dfch.CS.Examples.ActivityId.Logging.BizDfchCsExamplesActivityId;
 using biz.dfch.CS.Examples.ActivityId.Logging;
 using System.Web.Http.OData.Builder;
-using biz.dfch.CS.Examples.ActivityId.ODataServices.Core;
+using biz.dfch.CS.Examples.ActivityId.OdataServices.Core;
 
 namespace biz.dfch.CS.Examples.ActivityId
 {
@@ -51,7 +51,7 @@ namespace biz.dfch.CS.Examples.ActivityId
             );
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Sample>("Sampless");
+            SamplesController.ModelBuilder(builder);
             config.Routes.MapODataRoute("Core", "Core", builder.GetEdmModel());
 
             Logger.Default.End("WebApiConfig");
