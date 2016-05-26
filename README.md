@@ -17,7 +17,7 @@ Sample usage of System.Diagnostics.Trace.CorrelationManager.ActivityId in contex
 1. Add the following `flatFileSink` under `<!--[Add any built-in or custom sink definition here]-->`
 
 ```xml
-<flatFileSink name="apcFlatFileSink" fileName="C:\Logs\activityId.log" >
+<flatFileSink name="activityIdFlatFileSink" fileName="C:\Logs\activityId.log" >
   <sources>
 	<!-- The below settings shows a simple configuration sample for the buit-in non-transient fault tracing -->
 	<!-- Remove this eventSource if you'd like, and add your own configuration according to the documentation -->
