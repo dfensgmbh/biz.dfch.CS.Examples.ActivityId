@@ -104,9 +104,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ODataServices\Core\Sample.cs" />
+    <Compile Include="ODataServices\Core\SamplesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logging\BizDfchCsExamplesActivityId.cs" />
+    <Compile Include="Logging\LogggingAndModelStateValidationActionFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
